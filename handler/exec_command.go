@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 	"os/exec"
 
@@ -25,6 +26,11 @@ func execCommand(c *gin.Context) (out []byte, err error) {
 		return
 	}
 	out, err = exec.Command(req.Name, req.Args...).CombinedOutput()
+	fmt.Println("exec")
+	fmt.Println(req.Name)
+	fmt.Println(req.Args)
+	fmt.Println("result")
+	fmt.Printf("result: %v, %v", err, DecodeGBK(string(out)))
 	return
 }
 
